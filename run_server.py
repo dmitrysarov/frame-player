@@ -1,8 +1,6 @@
 # run_server.py
-import SimpleHTTPServer
+from http.server import SimpleHTTPRequestHandler, HTTPServer
 
-m = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map
-m[''] = 'text/plain'
-m.update(dict([(k, v + ';charset=UTF-8') for k, v in m.items()]))
-
-SimpleHTTPServer.test()
+server_address = ('', 3000)
+httpd = HTTPServer(server_address, SimpleHTTPRequestHandler)
+httpd.serve_forever()
